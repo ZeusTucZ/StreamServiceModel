@@ -1,11 +1,9 @@
 #include "Video.h"
-#include "string.h"
 
-Video::Video(string id_video, string nom, string gen, vector<int> cal, int dur) {
+Video::Video(string id_video, string nom, string gen, int dur) {
     id = id_video;
     nombre = nom;
     genero = gen;
-    calificaciones = cal;
     duracion = dur;
 }
 
