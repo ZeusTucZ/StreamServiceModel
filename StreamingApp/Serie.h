@@ -9,7 +9,7 @@ class Serie : public Video {
 private:
     int temporadas;
     int episodiosPorTemporada;
-    vector<vector<int>> calificaciones; // calificaciones[temporada][episodio]
+    vector<vector<vector<int>>> calificaciones;
 
 public:
     Serie(string titulo, string genero, string creador, int duracion,

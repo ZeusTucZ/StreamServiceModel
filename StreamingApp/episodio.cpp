@@ -1,4 +1,4 @@
-#include "episodio.h"
+#include "Episodio.h"
 
 Episodio::Episodio(std::string id, std::string nombre, std::string genero, int duracion,
                    int temporada, int numero)

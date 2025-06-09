@@ -4,8 +4,14 @@ Serie::Serie(std::string id, std::string nombre, std::string genero, int duracio
              int temporadas, int episodiosPorTemporada)
     : Video(id, nombre, genero, duracion),
       temporadas(temporadas),
-      episodiosPorTemporada(episodiosPorTemporada),
-      calificaciones(temporadas, std::vector<std::vector<int>>(episodiosPorTemporada)) {}
+      episodiosPorTemporada(episodiosPorTemporada) {
+
+    // Inicialización de matriz 2D de vectores
+    calificaciones.resize(temporadas);
+    for (int i = 0; i < temporadas; ++i) {
+        calificaciones[i].resize(episodiosPorTemporada);
+    }
+}
 
 void Serie::mostrarInformacion() const {
     cout << "ID: " << id << endl;
@@ -22,8 +28,8 @@ float Serie::calcularPromedio() const {
     int total = 0;
     for (const auto& temporada : calificaciones) {
         for (const auto& episodio : temporada) {
-            for (int cal : episodio) {
-                suma += cal;
+            for (int calificacion : episodio) {
+                suma += calificacion;
                 total++;
             }
         }
@@ -32,7 +38,7 @@ float Serie::calcularPromedio() const {
 }
 
 void Serie::agregarCalificacion(int calificacion) {
-    // No se usa en Series; solo se incluye por la herencia
+    cout << "Para series, usa agregarCalificacion(temporada, episodio, calificación)\n";
 }
 
 void Serie::agregarCalificacion(int temporada, int episodio, int calificacion) {
