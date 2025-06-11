@@ -5,7 +5,8 @@
 using namespace std;
 
 Pelicula::Pelicula(std::string id, std::string nombre, std::string genero, int duracion, std::string trailerURL)
-    : Video(id, nombre, genero, duracion), trailerURL(trailerURL) {}
+    : Video(id, nombre, genero, duracion,trailerURL), trailerURL(trailerURL) {}
+    //std::string id, std::string nombre, std::string genero, int duracion, std::string trailerURL
 
 void Pelicula::mostrarInformacion() const {
     cout << "ID: " << id << endl;

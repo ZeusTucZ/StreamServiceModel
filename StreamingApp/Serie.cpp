@@ -3,7 +3,8 @@
 // Constructor actualizado con trailerURL
 Serie::Serie(std::string id, std::string nombre, std::string genero, int duracion,
              int temporadas, int episodiosPorTemporada, std::string trailerURL)
-    : Video(id, nombre, genero, duracion),
+    : Video(id, nombre, genero, duracion,trailerURL),
+    //string id, string nombre, string genero, int duracion, string trailerUR
       temporadas(temporadas),
       episodiosPorTemporada(episodiosPorTemporada),
       trailerURL(trailerURL) // Guardamos la URL

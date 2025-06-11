@@ -31,3 +31,7 @@ public:
 
     virtual ~Video() {}; // Destructor virtual
 };
+// Implementación del constructor
+Video::Video(string id, string nombre, string genero, int duracion, string trailerURL)
+    : id(id), nombre(nombre), genero(genero), duracion(duracion), trailerURL(trailerURL) {}
+    
