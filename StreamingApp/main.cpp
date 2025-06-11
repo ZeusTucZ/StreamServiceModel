@@ -8,7 +8,7 @@
 
 using namespace std;
 
-// Cargar datos desde archivo
+// Cargar datos desde archivo (se espera que trailer sea el último campo en cada línea)
 void cargarDesdeArchivo(const string& nombreArchivo, vector<Video*>& catalogo) {
     ifstream archivo(nombreArchivo);
     if (!archivo.is_open()) {
@@ -23,30 +23,36 @@ void cargarDesdeArchivo(const string& nombreArchivo, vector<Video*>& catalogo) {
         getline(ss, tipo, ',');
 
         if (tipo == "PELÍCULA") {
-            string id, nombre, genero;
+            string id, nombre, genero, trailer;
             int duracion;
+
             getline(ss, id, ',');
             getline(ss, nombre, ',');
             getline(ss, genero, ',');
-            ss >> duracion;
-            catalogo.push_back(new Pelicula(id, nombre, genero, duracion));
+            ss >> duracion; ss.ignore();
+            getline(ss, trailer);
+
+            catalogo.push_back(new Pelicula(id, nombre, genero, duracion, trailer));
         }
         else if (tipo == "SERIE") {
-            string id, nombre, genero;
+            string id, nombre, genero, trailer;
             int duracion, temporadas, episodios;
+
             getline(ss, id, ',');
             getline(ss, nombre, ',');
             getline(ss, genero, ',');
             ss >> duracion; ss.ignore();
             ss >> temporadas; ss.ignore();
-            ss >> episodios;
-            catalogo.push_back(new Serie(id, nombre, genero, duracion, temporadas, episodios));
+            ss >> episodios; ss.ignore();
+            getline(ss, trailer);
+
+            catalogo.push_back(new Serie(id, nombre, genero, duracion, temporadas, episodios, trailer));
         }
         else if (tipo == "CALIFICACION") {
             string id;
             getline(ss, id, ',');
             auto it = find_if(catalogo.begin(), catalogo.end(), [&](Video* v) {
-                return v->getNombre() == id || id == v->getNombre();
+                return v->getNombre() == id;
             });
 
             if (it != catalogo.end()) {
@@ -81,6 +87,7 @@ int main() {
         cout << "3. Mostrar episodios de una serie con calificación\n";
         cout << "4. Mostrar películas con cierta calificación\n";
         cout << "5. Calificar un video\n";
+        cout << "6. Reproducir tráiler de un video\n";
         cout << "0. Salir\n";
         cout << "Elige una opción: ";
         cin >> opcion;
@@ -134,7 +141,6 @@ int main() {
                 for (Video* v : catalogo) {
                     Serie* serie = dynamic_cast<Serie*>(v);
                     if (serie && serie->getNombre() == nombreSerie) {
-                        // No se tiene lista de episodios, pero se puede mostrar info general
                         if (serie->calcularPromedio() >= califMin) {
                             serie->mostrarInformacion();
                         } else {
@@ -179,6 +185,25 @@ int main() {
                     }
                 }
 
+                if (!encontrado) {
+                    cout << "No se encontró ese video.\n";
+                }
+                break;
+            }
+
+            case 6: {
+                string titulo;
+                cout << "Título del video para ver tráiler: ";
+                cin.ignore();
+                getline(cin, titulo);
+                bool encontrado = false;
+                for (Video* v : catalogo) {
+                    if (v->getNombre() == titulo) {
+                        v->reproducirTrailer();
+                        encontrado = true;
+                        break;
+                    }
+                }
                 if (!encontrado) {
                     cout << "No se encontró ese video.\n";
                 }

@@ -5,24 +5,29 @@
 using namespace std;
 
 class Video {
-    protected:
-        string id, nombre, genero;
-        vector<int> calificaciones;
-        int duracion;
-    public:
-        Video(string, string, string, int); // Método constructor
+protected:
+    string id, nombre, genero;
+    vector<int> calificaciones;
+    int duracion;
+    string trailerURL; // 🔹 NUEVO: enlace del tráiler
 
-        // métodos
-        virtual float calcularPromedio() const = 0; // Cálcula el promedio de las calificaciones
-        virtual void agregarCalificacion(int) = 0; // Califica una serie o pelicula
-        virtual void mostrarInformacion() const = 0; // Muestra información de la serie o película
-        virtual void reproducir() const = 0; // Reproduce el video pasando el link del mismo
+public:
+    // 🔹 Constructor actualizado
+    Video(string id, string nombre, string genero, int duracion, string trailerURL);
 
-        // getters
-        string getNombre();
-        string getGenero();
-        int getDuracion();
-        const vector<int>& getCalificaciones();
+    // Métodos virtuales puros
+    virtual float calcularPromedio() const = 0;
+    virtual void agregarCalificacion(int) = 0;
+    virtual void mostrarInformacion() const = 0;
+    virtual void reproducir() const = 0;
+    virtual void reproducirTrailer() const = 0; // 🔹 NUEVO: método para reproducir tráiler
 
-        virtual ~Video() {}; // Destructor virtual
+    // Getters
+    string getNombre();
+    string getGenero();
+    int getDuracion();
+    const vector<int>& getCalificaciones();
+    string getTrailerURL(); // 🔹 NUEVO getter
+
+    virtual ~Video() {}; // Destructor virtual
 };

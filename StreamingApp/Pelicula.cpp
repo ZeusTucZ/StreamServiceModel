@@ -1,7 +1,11 @@
 #include "Pelicula.h"
+#include <iostream>
+#include <cstdlib> // para system()
 
-Pelicula::Pelicula(std::string id, std::string nombre, std::string genero, int duracion)
-    : Video(id, nombre, genero, duracion) {}
+using namespace std;
+
+Pelicula::Pelicula(std::string id, std::string nombre, std::string genero, int duracion, std::string trailerURL)
+    : Video(id, nombre, genero, duracion), trailerURL(trailerURL) {}
 
 void Pelicula::mostrarInformacion() const {
     cout << "ID: " << id << endl;
@@ -9,6 +13,7 @@ void Pelicula::mostrarInformacion() const {
     cout << "Género: " << genero << endl;
     cout << "Duración: " << duracion << " minutos" << endl;
     cout << "Promedio de calificaciones: " << calcularPromedio() << endl;
+    cout << "Tráiler: " << trailerURL << endl;
 }
 
 float Pelicula::calcularPromedio() const {
@@ -30,4 +35,10 @@ void Pelicula::agregarCalificacion(int calificacion) {
 
 void Pelicula::reproducir() const {
     cout << "Reproduciendo la película: " << nombre << endl;
+}
+
+void Pelicula::reproducirTrailer() const {
+    cout << "Reproduciendo tráiler en el navegador...\n";
+    string comando = "start " + trailerURL; // Usa "xdg-open" en Linux, "open" en Mac
+    system(comando.c_str());
 }

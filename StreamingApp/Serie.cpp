@@ -1,11 +1,13 @@
 #include "Serie.h"
 
+// Constructor actualizado con trailerURL
 Serie::Serie(std::string id, std::string nombre, std::string genero, int duracion,
-             int temporadas, int episodiosPorTemporada)
+             int temporadas, int episodiosPorTemporada, std::string trailerURL)
     : Video(id, nombre, genero, duracion),
       temporadas(temporadas),
-      episodiosPorTemporada(episodiosPorTemporada) {
-
+      episodiosPorTemporada(episodiosPorTemporada),
+      trailerURL(trailerURL) // Guardamos la URL
+{
     // Inicialización de matriz 2D de vectores
     calificaciones.resize(temporadas);
     for (int i = 0; i < temporadas; ++i) {
@@ -21,6 +23,7 @@ void Serie::mostrarInformacion() const {
     cout << "Temporadas: " << temporadas << endl;
     cout << "Episodios por temporada: " << episodiosPorTemporada << endl;
     cout << "Promedio de calificaciones: " << calcularPromedio() << endl;
+    cout << "Tráiler disponible en: " << trailerURL << endl; // Mostrar URL
 }
 
 float Serie::calcularPromedio() const {
@@ -56,4 +59,9 @@ void Serie::agregarCalificacion(int temporada, int episodio, int calificacion) {
 
 void Serie::reproducir() const {
     cout << "Reproduciendo la serie: " << nombre << endl;
+}
+
+// NUEVO: Método para reproducir el tráiler
+void Serie::reproducirTrailer() const {
+    cout << "Reproduciendo tráiler de la serie \"" << nombre << "\": " << trailerURL << endl;
 }
