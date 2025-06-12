@@ -1,8 +1,8 @@
 #include "Episodio.h"
 
 Episodio::Episodio(std::string id, std::string nombre, std::string genero, int duracion,
-                   int temporada, int numero)
-    : Video(id, nombre, genero, duracion), temporada(temporada), numero(numero) {}
+                   int temporada, int numero, std::string trailerURL)
+    : Video(id, nombre, genero, duracion, trailerURL), temporada(temporada), numero(numero) {}
 
 void Episodio::mostrarInformacion() const {
     cout<<"ID: "<<id<<endl;

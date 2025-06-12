@@ -24,5 +24,5 @@ public:
     void reproducir() const override;
 
     // NUEVO: Método para reproducir tráiler
-    void reproducirTrailer() const;
+    void reproducirTrailer() const override;
 };

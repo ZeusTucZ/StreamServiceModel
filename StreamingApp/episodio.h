@@ -10,7 +10,7 @@ private:
 
 public:
     Episodio(std::string id, std::string nombre, std::string genero, int duracion,
-             int temporada, int numero);
+             int temporada, int numero, std::string trailerURL = "");
 
     float calcularPromedio() const override;
     void agregarCalificacion(int calificacion) override;
