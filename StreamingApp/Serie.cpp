@@ -65,4 +65,6 @@ void Serie::reproducir() const {
 // NUEVO: Método para reproducir el tráiler
 void Serie::reproducirTrailer() const {
     cout << "Reproduciendo tráiler de la serie \"" << nombre << "\": " << trailerURL << endl;
+    string comando = "open " + trailerURL; // Usa "open" en Mac
+    system(comando.c_str());
 }

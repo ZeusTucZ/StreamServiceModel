@@ -40,6 +40,6 @@ void Pelicula::reproducir() const {
 
 void Pelicula::reproducirTrailer() const {
     cout << "Reproduciendo tráiler en el navegador...\n";
-    string comando = "start " + trailerURL; // Usa "xdg-open" en Linux, "open" en Mac
+    string comando = "open " + trailerURL; // Usa "xdg-open" en Linux, "open" en Mac
     system(comando.c_str());
 }
