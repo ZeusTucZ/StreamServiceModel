@@ -23,7 +23,8 @@ void Serie::mostrarInformacion() const {
     cout << "Duración promedio por episodio: " << duracion << " minutos" << endl;
     cout << "Temporadas: " << temporadas << endl;
     cout << "Episodios por temporada: " << episodiosPorTemporada << endl;
-    cout << "Promedio de calificaciones: " << calcularPromedio() << endl;
+    cout << "Promedio de calificaciones de episodios: " << calcularPromedio() << endl;
+    cout << "Promedio de calificaciones de la serie (general): " << calcularPromedioGeneral()<<endl;
     cout << "Tráiler disponible en: " << trailerURL << endl; // Mostrar URL
 }
 
@@ -50,6 +51,8 @@ void Serie::agregarCalificacion(int temporada, int episodio, int calificacion) {
         cout << "La calificación debe estar entre 1 y 5." << endl;
         return;
     }
+    calificacionesGenerales.push_back(calificacion);
+
     if (temporada >= 0 && temporada < temporadas &&
         episodio >= 0 && episodio < episodiosPorTemporada) {
         calificaciones[temporada][episodio].push_back(calificacion);
@@ -67,4 +70,24 @@ void Serie::reproducirTrailer() const {
     cout << "Reproduciendo tráiler de la serie \"" << nombre << "\": " << trailerURL << endl;
     string comando = "open " + trailerURL; // start en windows y open en mac
     system(comando.c_str());
+}
+
+//Metodos nuevos de calificacion
+
+void Serie::agregarCalificacionGeneral(int calificacion){
+    if (calificacion >= 1 && calificacion <=5){
+        calificacionesGenerales.push_back(calificacion);
+    } else {
+        cout<<"La calificacion debe estar entre 1 y 5."<<endl;
+    }
+}
+
+float Serie::calcularPromedioGeneral() const {
+    if (calificacionesGenerales.empty()) return 0.0;
+    int suma = 0;
+    for (int cal:calificacionesGenerales) {
+        suma += cal;
+    }
+    return static_cast<float>(suma)/calificacionesGenerales.size();
+    
 }

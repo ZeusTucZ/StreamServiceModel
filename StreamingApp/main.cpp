@@ -51,23 +51,33 @@ void cargarDesdeArchivo(const string& nombreArchivo, vector<Video*>& catalogo) {
         else if (tipo == "CALIFICACION") {
             string id;
             getline(ss, id, ',');
+
+            vector<string> campos;
+            string campo;
+            while (getline(ss, campo, ',')) {
+                campos.push_back(campo);
+            }   
+
             auto it = find_if(catalogo.begin(), catalogo.end(), [&](Video* v) {
                 return v->getNombre() == id;
             });
 
             if (it != catalogo.end()) {
                 Serie* serie = dynamic_cast<Serie*>(*it);
-                if (serie) {
-                    int temp, epi, calif;
-                    ss >> temp; ss.ignore(); ss >> epi; ss.ignore(); ss >> calif;
+                if (serie && campos.size()== 3) {
+                    int temp = stoi(campos[0]);
+                    int epi = stoi(campos[1]);
+                    int calif = stoi(campos[2]);
+                    
                     serie->agregarCalificacion(temp, epi, calif);
-                } else {
-                    int calif;
-                    ss >> calif;
+                } else if (campos.size() == 1){
+                    int calif = stoi(campos[0]);
                     (*it)->agregarCalificacion(calif);
                 }
             } else {
-                cout << "No se encontró video con ID: " << id << endl;
+                cout << "Formato de calificacion invalido para  '" << id << "'.\n";
+
+                
             }
         }
     }

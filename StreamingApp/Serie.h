@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include "Video.h"
+#include "episodio.h"
 
 using namespace std;
 
@@ -10,6 +11,7 @@ private:
     int temporadas;
     int episodiosPorTemporada;
     vector<vector<vector<int>>> calificaciones;
+    vector<int> calificacionesGenerales;
     string trailerURL; // NUEVO: URL del tráiler de la serie
 
 public:
@@ -25,4 +27,7 @@ public:
 
     // NUEVO: Método para reproducir tráiler
     void reproducirTrailer() const override;
+
+    void agregarCalificacionGeneral(int calificacion);
+    float calcularPromedioGeneral() const;
 };
