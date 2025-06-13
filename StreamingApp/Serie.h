@@ -24,6 +24,8 @@ public:
     void agregarCalificacion(int temporada, int episodio, int calificacion); // Método para series
     void mostrarInformacion() const override;
     void reproducir() const override;
+    void mostrarEpisodiosConCalificacion() const;
+
 
     // Método para reproducir tráiler
     void reproducirTrailer() const override;

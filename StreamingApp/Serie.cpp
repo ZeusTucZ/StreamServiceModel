@@ -91,3 +91,20 @@ float Serie::calcularPromedioGeneral() const {
     return static_cast<float>(suma)/calificacionesGenerales.size();
     
 }
+
+void Serie::mostrarEpisodiosConCalificacion() const {
+    cout << "\nEpisodios de \"" << nombre << "\":\n";
+    for (int t = 0; t < temporadas; ++t) {
+        for (int e = 0; e < episodiosPorTemporada; ++e) {
+            float promedio = 0.0;
+            const auto& califs = calificaciones[t][e];
+            if (!califs.empty()) {
+                int suma = 0;
+                for (int c : califs) suma += c;
+                promedio = static_cast<float>(suma) / califs.size();
+            }
+            cout << "Temporada " << (t+1) << ", Episodio " << (e+1)
+                 << " - Calificación promedio: " << promedio << "\n";
+        }
+    }
+}

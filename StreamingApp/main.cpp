@@ -141,23 +141,23 @@ int main() {
 
             case 3: {
                 string nombreSerie;
-                int califMin;
                 cout << "Nombre de la serie: ";
                 cin.ignore();
                 getline(cin, nombreSerie);
-                cout << "Calificación mínima: ";
-                cin >> califMin;
 
+                bool encontrada = false;
                 for (Video* v : catalogo) {
                     Serie* serie = dynamic_cast<Serie*>(v);
                     if (serie && serie->getNombre() == nombreSerie) {
-                        if (serie->calcularPromedio() >= califMin) {
-                            serie->mostrarInformacion();
-                        } else {
-                            cout << "La serie no cumple con la calificación mínima.\n";
-                        }
+                        serie->mostrarInformacion();
+                        serie->mostrarEpisodiosConCalificacion();
+                        encontrada = true;
                         break;
                     }
+                }
+
+                if (!encontrada) {
+                    cout << "No se encontró la serie \"" << nombreSerie << "\".\n";
                 }
                 break;
             }
