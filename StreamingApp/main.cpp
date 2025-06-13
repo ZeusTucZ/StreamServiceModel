@@ -191,9 +191,9 @@ int main() {
                         Serie* serie = dynamic_cast<Serie*>(v);
                         if (serie) {
                             int temp, epi;
-                            cout << "Es una serie. Ingresa temporada (0-based): ";
+                            cout << "Es una serie. Ingresa temporada: ";
                             cin >> temp;
-                            cout << "Número de episodio (0-based): ";
+                            cout << "Número de episodio: ";
                             cin >> epi;
                             serie->agregarCalificacion(temp, epi, cal);
                             cout << "Calificación agregada.\n";
