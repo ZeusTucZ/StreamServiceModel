@@ -16,4 +16,8 @@ public:
     void reproducir() const override;
 
     void reproducirTrailer() const override; // método para reproducir el tráiler
+
+    bool operator<(const Pelicula& otra) const {
+        return this->calcularPromedio() < otra.calcularPromedio();
+    }
 };

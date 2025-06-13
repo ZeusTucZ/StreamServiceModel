@@ -16,5 +16,9 @@ public:
     void agregarCalificacion(int calificacion) override;
     void mostrarInformacion() const override;
     void reproducir() const override;
+
+    bool operator<(const Episodio& otro) const {
+        return this->calcularPromedio() < otro.calcularPromedio();
+    }
 };
 

@@ -56,7 +56,7 @@ void cargarDesdeArchivo(const string& nombreArchivo, vector<Video*>& catalogo) {
             string campo;
             while (getline(ss, campo, ',')) {
                 campos.push_back(campo);
-            }   
+            }
 
             auto it = find_if(catalogo.begin(), catalogo.end(), [&](Video* v) {
                 return v->getNombre() == id;
@@ -64,20 +64,18 @@ void cargarDesdeArchivo(const string& nombreArchivo, vector<Video*>& catalogo) {
 
             if (it != catalogo.end()) {
                 Serie* serie = dynamic_cast<Serie*>(*it);
-                if (serie && campos.size()== 3) {
+                if (serie && campos.size() == 3) {
                     int temp = stoi(campos[0]);
                     int epi = stoi(campos[1]);
                     int calif = stoi(campos[2]);
-                    
+
                     serie->agregarCalificacion(temp, epi, calif);
-                } else if (campos.size() == 1){
+                } else if (campos.size() == 1) {
                     int calif = stoi(campos[0]);
                     (*it)->agregarCalificacion(calif);
                 }
             } else {
-                cout << "Formato de calificacion invalido para  '" << id << "'.\n";
-
-                
+                cout << "Formato de calificación inválido para '" << id << "'.\n";
             }
         }
     }
@@ -98,6 +96,7 @@ int main() {
         cout << "4. Mostrar películas con cierta calificación\n";
         cout << "5. Calificar un video\n";
         cout << "6. Reproducir tráiler de un video\n";
+        cout << "7. Ordenar y mostrar catálogo por calificación\n";
         cout << "0. Salir\n";
         cout << "Elige una opción: ";
         cin >> opcion;
@@ -119,7 +118,7 @@ int main() {
                     string genero;
                     cout << "Género a buscar: ";
                     cin.ignore();
-                    getline(cin, genero);  // <-- CORREGIDO
+                    getline(cin, genero);
 
                     for (Video* v : catalogo) {
                         if (v->getGenero() == genero) {
@@ -201,7 +200,6 @@ int main() {
                             cout << "Calificación agregada.\n";
                             cout << "Promedio actualizado: " << serie->calcularPromedio() << endl;
 
-                            // --- Agregar calificación al archivo CSV ---
                             ofstream archivo("datos.csv", ios::app);
                             if (archivo.is_open()) {
                                 archivo << "CALIFICACION," << titulo << "," << temp << "," << epi << "," << cal << endl;
@@ -209,13 +207,11 @@ int main() {
                             } else {
                                 cout << "No se pudo abrir el archivo para guardar la calificación.\n";
                             }
-                            // ------------------------------------------
                         } else {
                             v->agregarCalificacion(cal);
                             cout << "Calificación agregada.\n";
                             cout << "Promedio actualizado: " << v->calcularPromedio() << endl;
 
-                            // --- Agregar calificación al archivo CSV ---
                             ofstream archivo("datos.csv", ios::app);
                             if (archivo.is_open()) {
                                 archivo << "CALIFICACION," << titulo << "," << cal << endl;
@@ -223,7 +219,6 @@ int main() {
                             } else {
                                 cout << "No se pudo abrir el archivo para guardar la calificación.\n";
                             }
-                            // ------------------------------------------
                         }
                         encontrado = true;
                         break;
@@ -251,6 +246,18 @@ int main() {
                 }
                 if (!encontrado) {
                     cout << "No se encontró ese video.\n";
+                }
+                break;
+            }
+
+            case 7: {
+                sort(catalogo.begin(), catalogo.end(), [](Video* a, Video* b) {
+                    return a->calcularPromedio() < b->calcularPromedio();
+                });
+                cout << "\n--- Catálogo ordenado por promedio de calificación ---\n";
+                for (Video* v : catalogo) {
+                    v->mostrarInformacion();
+                    cout << "------------------\n";
                 }
                 break;
             }
