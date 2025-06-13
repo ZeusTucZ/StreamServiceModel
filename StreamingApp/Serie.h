@@ -2,7 +2,7 @@
 #include <vector>
 #include <iostream>
 #include "Video.h"
-#include "episodio.h"
+#include "Episodio.h"
 
 using namespace std;
 
