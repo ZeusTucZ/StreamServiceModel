@@ -9,10 +9,10 @@ protected:
     string id, nombre, genero;
     vector<int> calificaciones;
     int duracion;
-    string trailerURL; // 🔹 NUEVO: enlace del tráiler
+    string trailerURL; // enlace del tráiler
 
 public:
-    // 🔹 Constructor actualizado
+    // Constructor
     Video(string id, string nombre, string genero, int duracion, string trailerURL);
 
     // Métodos virtuales puros
@@ -20,14 +20,14 @@ public:
     virtual void agregarCalificacion(int) = 0;
     virtual void mostrarInformacion() const = 0;
     virtual void reproducir() const = 0;
-    virtual void reproducirTrailer() const = 0; // 🔹 NUEVO: método para reproducir tráiler
+    virtual void reproducirTrailer() const = 0; // método para reproducir tráiler
 
     // Getters
     string getNombre();
     string getGenero();
     int getDuracion();
     const vector<int>& getCalificaciones();
-    string getTrailerURL(); // 🔹 NUEVO getter
+    string getTrailerURL(); // getter
 
     virtual ~Video() {}; // Destructor virtual
 };

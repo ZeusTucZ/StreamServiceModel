@@ -1,6 +1,6 @@
 #include "Serie.h"
 
-// Constructor actualizado con trailerURL
+// Constructor 
 Serie::Serie(std::string id, std::string nombre, std::string genero, int duracion,
              int temporadas, int episodiosPorTemporada, std::string trailerURL)
     : Video(id, nombre, genero, duracion,trailerURL),
@@ -65,14 +65,14 @@ void Serie::reproducir() const {
     cout << "Reproduciendo la serie: " << nombre << endl;
 }
 
-// NUEVO: Método para reproducir el tráiler
+// Método para reproducir el tráiler
 void Serie::reproducirTrailer() const {
     cout << "Reproduciendo tráiler de la serie \"" << nombre << "\": " << trailerURL << endl;
     string comando = "open " + trailerURL; // start en windows y open en mac
     system(comando.c_str());
 }
 
-//Metodos nuevos de calificacion
+//Metodos de calificacion
 
 void Serie::agregarCalificacionGeneral(int calificacion){
     if (calificacion >= 1 && calificacion <=5){

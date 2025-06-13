@@ -4,10 +4,10 @@
 
 class Pelicula : public Video {
 private:
-    std::string trailerURL; // Nuevo atributo
+    std::string trailerURL; // atributo
 
 public:
-    // Nuevo constructor con trailerURL
+    // constructor 
     Pelicula(std::string id, std::string nombre, std::string genero, int duracion, std::string trailerURL);
 
     float calcularPromedio() const override;
@@ -15,5 +15,5 @@ public:
     void mostrarInformacion() const override;
     void reproducir() const override;
 
-    void reproducirTrailer() const override; // Nuevo método para reproducir el tráiler
+    void reproducirTrailer() const override; // método para reproducir el tráiler
 };
