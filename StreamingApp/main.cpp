@@ -200,10 +200,30 @@ int main() {
                             serie->agregarCalificacion(temp, epi, cal);
                             cout << "Calificación agregada.\n";
                             cout << "Promedio actualizado: " << serie->calcularPromedio() << endl;
+
+                            // --- Agregar calificación al archivo CSV ---
+                            ofstream archivo("datos.csv", ios::app);
+                            if (archivo.is_open()) {
+                                archivo << "CALIFICACION," << titulo << "," << temp << "," << epi << "," << cal << endl;
+                                archivo.close();
+                            } else {
+                                cout << "No se pudo abrir el archivo para guardar la calificación.\n";
+                            }
+                            // ------------------------------------------
                         } else {
                             v->agregarCalificacion(cal);
                             cout << "Calificación agregada.\n";
                             cout << "Promedio actualizado: " << v->calcularPromedio() << endl;
+
+                            // --- Agregar calificación al archivo CSV ---
+                            ofstream archivo("datos.csv", ios::app);
+                            if (archivo.is_open()) {
+                                archivo << "CALIFICACION," << titulo << "," << cal << endl;
+                                archivo.close();
+                            } else {
+                                cout << "No se pudo abrir el archivo para guardar la calificación.\n";
+                            }
+                            // ------------------------------------------
                         }
                         encontrado = true;
                         break;
