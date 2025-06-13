@@ -118,7 +118,9 @@ int main() {
                 if (subop == 1) {
                     string genero;
                     cout << "Género a buscar: ";
-                    cin >> genero;
+                    cin.ignore();
+                    getline(cin, genero);  // <-- CORREGIDO
+
                     for (Video* v : catalogo) {
                         if (v->getGenero() == genero) {
                             v->mostrarInformacion();
